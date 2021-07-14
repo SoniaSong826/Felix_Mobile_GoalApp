@@ -1,0 +1,23 @@
+export default {
+	cardColors: [
+		'#E5233D',
+		'#DDA73A',
+		'#4CA146',
+		'#C7212F',
+		'#EF402D',
+		'#27BFE6',
+		'#FBC412',
+		'#A31C44',
+		'#F26A2E',
+		'#E01483',
+		'#F89D2A',
+		'#BF8D2C',
+		'#407F46',
+		'#1E96D3',
+		'#59BA47',
+		'#146A9E',
+		'#1e90ff',
+	],
+	lightBlue: '#84a5ba',
+	white: '#FFFFFF',
+};

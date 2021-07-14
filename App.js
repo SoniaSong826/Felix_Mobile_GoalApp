@@ -1,21 +1,61 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
+import HomeScreen from './app/screens/HomeScreen';
+import TargetScreen from './app/screens/TargetScreen';
+import colors from './app/config/colors';
+import AppLoading from 'expo-app-loading';
+import { useFonts, Roboto_400Regular, Roboto_700Bold } from '@expo-google-fonts/roboto';
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+	const Stack = createStackNavigator();
+	let [fontsLoaded] = useFonts({
+		Roboto_400Regular,
+		Roboto_700Bold,
+	});
+	if (!fontsLoaded) {
+		return <AppLoading />;
+	} else {
+		return (
+			<NavigationContainer>
+				<Stack.Navigator initialRouteName="Home">
+					<>
+						<Stack.Screen
+							name="Home"
+							component={HomeScreen}
+							options={{
+								headerStyle: {
+									backgroundColor: colors.lightBlue,
+								},
+								title: 'THE 17 GOALS',
+								headerTintColor: colors.white,
+								headerTitleStyle: {
+									fontSize: 20,
+									fontFamily: 'Roboto_700Bold',
+								},
+							}}
+						/>
+						<Stack.Screen
+							name="Target"
+							component={TargetScreen}
+							options={({ route }) => ({
+								headerStyle: {
+									backgroundColor: colors.cardColors[route.params.goalId - 1],
+								},
+								title: 'GOAL ' + route.params.goalId,
+								headerTintColor: colors.white,
+								headerTitleStyle: {
+									fontSize: 20,
+									fontFamily: 'Roboto_700Bold',
+								},
+								headerBackTitleStyle: {
+									fontFamily: 'Roboto_400Regular',
+								},
+							})}
+						/>
+					</>
+				</Stack.Navigator>
+			</NavigationContainer>
+		);
+	}
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
